@@ -19,18 +19,9 @@
 import os
 import csv
 
-budget_data = os.path.join("..", "Resources", "budget_data.csv")
+filepath = os.path.join(python-challenge/PyBank Folder/PBResources/budget_data.csv)
+with open(filepath) as csvfile:
 
-with open(budget_data, encoding='utf-8-sig') as csvfile:
-    csv_reader = csv.reader(csvfile.csv, delimiter=",")
-
-    # @NOTE: This time, we do not use `next(csv_reader)` because there is no header for this file
-
-    # Read through each row of data after the header
-    for row in csv_reader:
-
-        # Convert row to float and compare to grams of fiber
-        if float(row[1]) == "JAN-2010":
-            print(row)
-
+    csvreader = csv.reader(csvfile, delimiter=',')
+    print(csvreader)
 
