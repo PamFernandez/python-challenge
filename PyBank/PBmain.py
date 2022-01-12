@@ -19,7 +19,7 @@
 import os
 import csv
 
-csvpath = os.path.join('..', 'PBResources', 'budget_data.csv')
+csvpath = os.path.join('PBResources', 'budget_data.csv')
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
