@@ -27,11 +27,11 @@ budget_csv = os.path.join('PBResources', 'budget_data.csv')
 # open and read csv
 with open(budget_csv, 'r', encoding='utf-8') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    
     next(csvreader)
-
     csvdata = list(csvreader)
-    print(csvdata)
+
+# months
+total_months = len(list(csvdata))
 
 # total    
 c = 0
@@ -40,31 +40,22 @@ for row in csvdata:
 print(c)
 
 # profit_loss
-sum = 0
-for sum in profit_loss:
-    sum = sum + profit_loss
-print(sum)
+# sum = 0
+# for sum in profit_loss:
+#     sum = sum + profit_loss
+# print(sum)
 
+#     # total can be found by summing "Profit/Losses"
+#     total_pl = sum('Profits/Losses')
 
+#     # avg_change can be found by dividing total_pl by total_months
+#     avg_change = (total_pl / total_months)
 
+#     # greatest increase can be found by 
+#     #great_inc =
 
-# # print the analysis summary    
-# print(f"Financial Analysis")
-
-# total months can be found by counting "Date"
-# print(len(budget_csv "Date"))
-
-# # total can be found by summing "Profit/Losses"
-# total_pl = sum(budget_csv[2])
-
-# # avg_change can be found by dividing total_pl by total_months
-# avg_change = (total_pl / total_months)
-
-# # greatest increase can be found by 
-# #great_inc =
-
-# # greatest decrease can be found by
-# #great_dec =
+#     # greatest decreas can be found by
+#     #great_dec =
 
 #     # print the analysis
 #     print(f"Financial Analysis")
@@ -75,11 +66,20 @@ print(sum)
 #     print(f"Greatest Increase in Profits: {great_inc}")
 #     print(f"Greatest Decrease in Profits: {great_dec}")
 
-# print the analysis
-# print(f"Financial Analysis")
-# print(f"------------------")
-# print(f"Total Months: {total_months}")
-# print(f"Total: {total_pl}")
-# print(f"Average Change: {avg_change}")
-# print(f"Greatest Increase in Profits: {great_inc}")
-# print(f"Greatest Decrease in Profits: {great_dec}")
+# # following code from 3/Activities/01-Stu_CerealCleaner/Solved
+# # open and read csv
+# with open(budget_csv, 'r', encoding='utf-8') as csvfile:
+#     csvreader = csv.reader(csvfile, delimiter=',')
+    
+#     # read the header row first
+#     header = next(csvreader)
+
+# # print the analysis    
+    
+#     print(f"Financial Analysis")
+#     print(f"------------------")
+#     print(f"Total Months: {total_months}")
+#     print(f"Total: {total_pl}")
+#     print(f"Average Change: {avg_change}")
+#     print(f"Greatest Increase in Profits: {great_inc}")
+#     print(f"Greatest Decrease in Profits: {great_dec}")
