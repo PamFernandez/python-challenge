@@ -16,63 +16,92 @@
 # 
 # The final script should both print the analysis to the terminal and export a text file with the results
 
-# Dependencies
+# import dependencies
 import csv
 import os
 
-# Files to load and output
+# files to load and output
 file_to_load = os.path.join("PBResources", "budget_data.csv")
 file_to_output = os.path.join("PBAnalysis", "budget_analysis.txt")
 
-# Track various financial parameters
+# variables
 total_months = 0
+profit_loss_total = 0
 monthly_change = []
 month_count = []
-net_change_list = []
-greatest_increase = ["", 0]
-greatest_decrease = ["", 9999999999999999999]
-profit_loss = 0
+great_inc = 0
+great_inc_month = 0
+great_dec = 0
+great_dec_month = 0
 
-# Read the csv and convert it into a list of dictionaries
-with open(file_to_load) as financial_data:
-    reader = csv.reader(financial_data, delimiter=",")
+# open and read the CSV file
+with open(file_to_load, 'r') as budget_data:
+    reader = csv.reader(budget_data, delimiter=",")
 
     # read the header row
-    # header = next(reader)
+    header = next(reader)
     # skip the header row
-    next(reader)
+    # next(reader)
     row = next(reader)
     # Extract first row to avoid appending to net_change_list
     first_row = next(reader)
 
     # variables for calculations
     total_months += 1
-    profit_loss += int(first_row[1])
+    profit_loss_total += int(first_row[1])
     previous_row = int(row[1])
-    prev_net = int(first_row[1])
-    
-    # great_inc = 
-    # great_dec = 
- 
+     
     # read each row of data
     for row in reader:
   
         # total number of 'Dates' (months)
         total_months += 1
-        print(total_months)
-
+        
         # total of all 'Profit/Losses'
-        profit_loss += int(row[1])
-        print(profit_loss)
-
-        # months change - used only for calculating average change
-        revenue_change = int(row[1]) - previous_row
-        monthly_change.append(revenue_change)
-        print(revenue_change) 
+        profit_loss_total += int(row[1])
+        
+        # each months change - used only for calculating average change
+        each_month_change = int(row[1]) - previous_row
+        monthly_change.append(each_month_change)
         month_count.append(row[0])
-        # print(monthly_change)
+        
+        # greatest increase
+        if int(row[1]) > great_inc:
+            great_inc = int(row[1])
+            great_inc_month = row[0]
+       
+        # greatest decrease
+        if int(row[1]) < great_dec:
+            great_dec = int(row[1])
+            great_dec_month = row[0]
 
-        # GETTING THE WRONG NUMBER
-        # average change can be found by dividing profit_loss by total_months - 1
-        average_change = sum(monthly_change) / (total_months)
-        print(average_change)
+    # GETTING THE WRONG NUMBER
+    # average change can be found by dividing profit_loss by total_months - 1
+    avg_change = sum(monthly_change) / (total_months)
+    print(sum(monthly_change))
+
+    highest = max(monthly_change)
+    lowest = min(monthly_change)
+
+# print analysis
+print(f"Financial Analysis")
+print(f"------------------")
+print(f"Total Months: {total_months}")
+print(f"Total: {profit_loss_total}")
+print(f"Average Change: ${avg_change}")
+print(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
+print(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
+
+
+# HAVEN'T TRIED THIS YET WANT TO GET THE CORRECT OUTPUT FIRST
+# create output file
+
+# with open(file_to_output, 'w', newline = '') as csvfile:
+#     csvwriter = csv.writer(csvfile, delimiter = ",")
+#     csvwriter.writerow(f"Financial Analysis")
+#     csvwriter.writerow(f"------------------")
+#     csvwriter.writerow(f"Total Months: {total_months}")
+#     csvwriter.writerow(f"Total: {profit_loss_total}")
+#     csvwriter.writerow(f"Average Change: {avg_change}")
+#     csvwriter.writerow(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
+#     csvwriter.writerow(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
