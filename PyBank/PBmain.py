@@ -16,48 +16,63 @@
 # 
 # The final script should both print the analysis to the terminal and export a text file with the results
 
-import os
+# Dependencies
 import csv
+import os
 
-# path to collect the data from the resources folder (3/Activities/08-Par_Wrestling)
-budget_csv = os.path.join('PBResources', 'budget_data.csv')
+# Files to load and output
+file_to_load = os.path.join("PBResources", "budget_data.csv")
+file_to_output = os.path.join("PBAnalysis", "budget_analysis.txt")
 
-# open and read the csv file
-with open(budget_csv, 'r', encoding='utf-8') as csvfile:
-    # split the data on commas
-    csvreader = csv.reader(csvfile, delimiter=',')
-    # remove header
-    next(csvreader)
+# Track various financial parameters
+total_months = 0
+monthly_change = []
+month_count = []
+net_change_list = []
+greatest_increase = ["", 0]
+greatest_decrease = ["", 9999999999999999999]
+profit_loss = 0
+
+# Read the csv and convert it into a list of dictionaries
+with open(file_to_load) as financial_data:
+    reader = csv.reader(financial_data, delimiter=",")
+
+    # read the header row
+    # header = next(reader)
+    # skip the header row
+    next(reader)
+    row = next(reader)
+    # Extract first row to avoid appending to net_change_list
+    first_row = next(reader)
+
+    # variables for calculations
+    total_months += 1
+    profit_loss += int(first_row[1])
+    previous_row = int(row[1])
+    prev_net = int(first_row[1])
     
-#   # total months is the sum of the 'Date' column [0]
-    total_months = len(list(csvfile))
-    print(total_months)
+    # great_inc = 
+    # great_dec = 
+ 
+    # read each row of data
+    for row in reader:
+  
+        # total number of 'Dates' (months)
+        total_months += 1
+        print(total_months)
 
-#   # total is the total of the 'Profit/Losses' column [1]
-    profit_loss_total = 0
-    for row in csvfile:
-        profit_loss_total = profit_loss_total + int(row [1])
-    print(profit_loss_total)
+        # total of all 'Profit/Losses'
+        profit_loss += int(row[1])
+        print(profit_loss)
 
-#     # month change needs to be created and the column appended to budget_data
-#     # month change is ('Profit/Losses' value 2) minus ('Profit/Losses value 1)
-#     month_change =
+        # months change - used only for calculating average change
+        revenue_change = int(row[1]) - previous_row
+        monthly_change.append(revenue_change)
+        print(revenue_change) 
+        month_count.append(row[0])
+        # print(monthly_change)
 
-#     # average change is (sum of month_change) divided by (count of month_change)
-#     avg_change = 
-
-#     # greatest increase in profits is the max value of month_change
-#     great_inc = max(month_change)
-
-#     # greatest decrease in profits is the min value of month_change
-#     great_dec = min(month_change)
-
-#     # print out the budget data stats that are calculated above
-#     print(f"Financial Analysis")
-#     print(f"------------------")
-#     print(f"Total Months: {total_months}")
-#     print(f"Total: {profit_loss_total}")
-#     print(f"Average Change: {avg_change}")
-#     print(f"Greatest Increase in Profits: {great_inc}")
-#     print(f"Greatest Decrease in Profits: {great_dec}")
-
+        # GETTING THE WRONG NUMBER
+        # average change can be found by dividing profit_loss by total_months - 1
+        average_change = sum(monthly_change) / (total_months)
+        print(average_change)
