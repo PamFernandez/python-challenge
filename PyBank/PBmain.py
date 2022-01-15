@@ -2,8 +2,8 @@
 # calculate the net total amount of "profit/losses" over the entire period
 # calculate the total amount of "profit/losses" over the entire period
 #   then find the average of those changes
-# calculate the greatest increase in profits (date and amount) ovetr the entire period
-# calculate the greatest decrease in profits (date and amount) ovetr the entire period
+# calculate the greatest increase in profits (date and amount) over the entire period
+# calculate the greatest decrease in profits (date and amount) over the entire period
 #
 # for example:
 # Financial Analysis
@@ -93,15 +93,12 @@ print(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
 print(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
 
 
-# HAVEN'T TRIED THIS YET WANT TO GET THE CORRECT OUTPUT FIRST
 # create output file
-
-# with open(file_to_output, 'w', newline = '') as csvfile:
-#     csvwriter = csv.writer(csvfile, delimiter = ",")
-#     csvwriter.writerow(f"Financial Analysis")
-#     csvwriter.writerow(f"------------------")
-#     csvwriter.writerow(f"Total Months: {total_months}")
-#     csvwriter.writerow(f"Total: {profit_loss_total}")
-#     csvwriter.writerow(f"Average Change: {avg_change}")
-#     csvwriter.writerow(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
-#     csvwriter.writerow(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
+with open(file_to_output, 'w', newline='') as txtfile:
+    txtfile.write(f"Financial Analysis\n")
+    txtfile.write(f"------------------\n")
+    txtfile.write(f"Total Months: {total_months}\n")
+    txtfile.write(f"Total: {profit_loss_total}\n")
+    txtfile.write(f"Average Change: {avg_change}\n")
+    txtfile.write(f"Greatest Increase in Profits: {great_inc_month}, (${highest})\n")
+    txtfile.write(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})\n")
