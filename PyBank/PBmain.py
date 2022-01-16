@@ -1,7 +1,7 @@
-# calculate the total number of months included in the datase
+# calculate the total number of months included in the dataset
 # calculate the net total amount of "profit/losses" over the entire period
-# calculate the total amount of "profit/losses" over the entire period
-#   then find the average of those changes
+# calculate the changes in "profit/losses" over the entire period then find 
+#   the average of those changes
 # calculate the greatest increase in profits (date and amount) over the entire period
 # calculate the greatest decrease in profits (date and amount) over the entire period
 #
@@ -35,29 +35,29 @@ great_dec = 0
 great_dec_month = 0
 
 # open and read the CSV file
-with open(file_to_load, 'r') as budget_data:
-    reader = csv.reader(budget_data, delimiter=",")
+with open(file_to_load, 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=",")
 
     # read the header row
-    header = next(reader)
+    header = next(csvfile)
+    
     # skip the header row
     # next(reader)
+    
     row = next(reader)
-    # Extract first row to avoid appending to net_change_list
-    first_row = next(reader)
-
-    # variables for calculations
+    
+    # variables for calculations 
     total_months += 1
-    profit_loss_total += int(first_row[1])
+    profit_loss_total += int(row[1])
     previous_row = int(row[1])
      
     # read each row of data
     for row in reader:
   
-        # total number of 'Dates' (months)
+        # calculate the total number of months included in the dataset
         total_months += 1
         
-        # total of all 'Profit/Losses'
+        # calculate the net total amount of "profit/losses" over the entire period
         profit_loss_total += int(row[1])
         
         # each months change - used only for calculating average change
@@ -65,12 +65,12 @@ with open(file_to_load, 'r') as budget_data:
         monthly_change.append(each_month_change)
         month_count.append(row[0])
         
-        # greatest increase
+        # calculate the greatest increase in profits (date and amount) over the entire period
         if int(row[1]) > great_inc:
             great_inc = int(row[1])
             great_inc_month = row[0]
        
-        # greatest decrease
+        # calculate the greatest decrease in profits (date and amount) over the entire period
         if int(row[1]) < great_dec:
             great_dec = int(row[1])
             great_dec_month = row[0]
@@ -87,13 +87,13 @@ with open(file_to_load, 'r') as budget_data:
 print(f"Financial Analysis")
 print(f"------------------")
 print(f"Total Months: {total_months}")
-print(f"Total: {profit_loss_total}")
+print(f"Total: ${profit_loss_total}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
 print(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
 
 
-# create output file
+# create output to a text file
 with open(file_to_output, 'w', newline='') as txtfile:
     txtfile.write(f"Financial Analysis\n")
     txtfile.write(f"------------------\n")
