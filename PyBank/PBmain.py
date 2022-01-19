@@ -1,21 +1,3 @@
-# calculate the total number of months included in the dataset
-# calculate the net total amount of "profit/losses" over the entire period
-# calculate the changes in "profit/losses" over the entire period then find 
-#   the average of those changes
-# calculate the greatest increase in profits (date and amount) over the entire period
-# calculate the greatest decrease in profits (date and amount) over the entire period
-#
-# for example:
-# Financial Analysis
-# ------------------
-# Total Months: 86
-# Total: $38382578
-# Average Change: $-2315.12
-# Greatest Increase in Profits: Feb-2012 ($1926159)
-# Greatest Decrease in Profits: Sep-2013 ($2196167)
-# 
-# The final script should both print the analysis to the terminal and export a text file with the results
-
 # import dependencies
 import csv
 import os
@@ -38,11 +20,8 @@ great_dec_month = 0
 with open(file_to_load, 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=",")
 
-    # read the header row
-    header = next(csvfile)
-    
     # skip the header row
-    # next(reader)
+    next(reader)
     
     row = next(reader)
     
@@ -75,10 +54,8 @@ with open(file_to_load, 'r') as csvfile:
             great_dec = int(row[1])
             great_dec_month = row[0]
 
-    # GETTING THE WRONG NUMBER
     # average change can be found by dividing profit_loss by total_months - 1
     avg_change = sum(monthly_change) / (total_months)
-    print(sum(monthly_change))
 
     highest = max(monthly_change)
     lowest = min(monthly_change)
@@ -91,7 +68,6 @@ print(f"Total: ${profit_loss_total}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {great_inc_month}, (${highest})")
 print(f"Greatest Decrease in Profits: {great_dec_month}, (${lowest})")
-
 
 # create output to a text file
 with open(file_to_output, 'w', newline='') as txtfile:
